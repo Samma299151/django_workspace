@@ -1,0 +1,24 @@
+table.customer-table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table.customer-table th {
+    background-color: #d9d9d9;
+    border: 1px solid #999;
+    padding: 5px 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.customer-table td {
+    border: 1px solid #999;
+    padding: 5px 10px;
+    background-color: #f8f8f8;
+}
+
+table.customer-table input {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
