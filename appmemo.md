@@ -61,7 +61,7 @@ def CustomerSearch(request):
 
 ## 得意先管理メニュー⇔得意先検索の遷移を追加する
 
-**HTMLを使用しての画面表示P70**
+### HTMLを使用しての画面表示P70
 1. HTMLを作成する
 1. app/templates/app配下にそれぞれのHTMLを作成する
 1. h1タグで適当な文字を入力する
@@ -72,9 +72,9 @@ def CustomerManagementMenu(request):
 ```
 1. 画面が表示されているかを確認する
 
-**ボタンを追加して画面遷移を行うP75**
+### ボタンを追加して画面遷移を行うP75
 1. HTMLを修正する→{{title}}などに書き換えを行う
-1. aタグでリンクを追加
+1. onclickでURLを追加
 url名を使用することでURLの変更に対応
 ```html
     <button onclick="location.href='{% url 'CustomerManagementMenu' %}'">
@@ -93,4 +93,33 @@ def CustomerManagementMenu(request):
 
 ```
 
-## DBからデータを取得する(P138)
+## DBからデータを全件取得する(P138~141参照)
+
+### モデルを作成する
+1. models.pyを作成する
+1. Customerモデルを作成
+**設計書の型、桁数に従って作成すること**
+```python
+class Customer(models.Model):
+    customer_code = models.CharField(
+        max_length=6,
+        primary_key=True)
+    customer_name = models.CharField(max_length=20)
+    customer_telno = models.CharField(max_length=13)
+    customer_postalcode = models.CharField(max_length=8)
+    customer_address = models.CharField(max_length=40)
+    class Meta:
+        db_table = 'customer'
+```
+
+### views.pyを書き換えて全件取得する
+```python
+def CustomerSearch(request):
+    data = Customer.objects.all()
+    params = {
+        'mainTitle':'管理システム',
+        'title':'得意先検索',
+        'data': data,
+    }
+    return render(request, 'app/CustomerList.html', params)
+```

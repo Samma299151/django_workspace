@@ -1,24 +1,111 @@
-table.customer-table {
-    border-collapse: collapse;
-    font-size: 14px;
+/* 画面全体 */
+body {
+    font-family: sans-serif;
+    background-color: #ffffff;
 }
 
-table.customer-table th {
-    background-color: #d9d9d9;
+/* ヘッダー */
+.header {
+    background-color: #00e5ee;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #666;
+    padding: 10px 0;
+}
+
+/* サブタイトル */
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    margin: 15px 0;
+}
+
+/* メインエリア */
+.content {
+    position: static;
+    margin-top: 20px;
+}
+
+/* 左ボタンエリア */
+.left-menu {
+    position: absolute;
+    left: 30px;
+}
+
+/* 中央ボタンエリア */
+.center-menu {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.center-menu button {
+    display: block;
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+/* 検索エリア(フォームデザイン) */
+.search-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-area label {
+    font-weight: bold;
+    color: #666;
+}
+
+/* 得意先一覧テーブルデザイン(customer-list) */
+.customer-list {
+    width: 700px;
+    margin-left: 220px;
+    border-collapse: collapse;
+}
+
+.customer-list th, 
+.customer-list td{
     border: 1px solid #999;
-    padding: 5px 10px;
-    text-align: left;
+    padding: 3px 5px;
     white-space: nowrap;
 }
 
-table.customer-table td {
-    border: 1px solid #999;
-    padding: 5px 10px;
-    background-color: #f8f8f8;
+.customer-list th {
+    background-color: #f0f0f0;
 }
 
-table.customer-table input {
-    border: none;
-    background-color: transparent;
-    width: 100%;
+/* 得意先検索結果表示テーブルデザイン(customer-detail) */
+.customer-detail {
+    border-collapse: collapse;
+    margin: 20px auto; /* 中央寄せ */
+}
+
+.customer-detail th,
+.customer-detail td {
+    border: 1px solid #999;
+    padding: 5px 10px;
+}
+
+.customer-detail th {
+    background-color: #f0f0f0;
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.customer-detail td {
+    width: 200px;
+}
+
+/* 検索結果該当なし表示デザイン */
+.form-check {
+    /* display: flex;
+    justify-content: center; */
+    text-align: center;
 }

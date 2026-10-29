@@ -1,14 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}"/>
 </head>
 <body>
-    <h1>{{title}}</h1>
-    <button onclick="location.href='{% url 'CustomerSearch' %}'">
-        得意先検索
-    </button>
+    <div class="header">
+        {{mainTitle}}
+    </div>
+
+    <div class="title">
+        {{title}}
+    </div>
+        
+    <div class="content">
+        <!-- メニューボタン管理 -->
+         <!-- 左側ボタン -->
+        <div class="left-menu">
+            <button onclick="location.href='{% url 'MainMenu' %}'" name="MainMenuButton">
+                管理メニュー
+            </button>
+        </div>
+
+        <!-- 中央ボタン -->
+        <div class="center-menu">
+            <button onclick="location.href='{% url 'CustomerList' %}'" name="CustomerList">
+                得意先一覧
+            </button>
+
+            <button onclick="location.href='{% url 'CustomerSearch' %}'" name="CustomerSearch">
+                得意先検索
+            </button>
+            
+            <button onclick="location.href='{% url 'CustomerRegist' %}'" name="CustomerRegist">
+                得意先登録
+            </button>
+
+            <button onclick="location.href='{% url 'CustomerDelete' %}'" name="CustomerDelete">
+                得意先削除
+            </button>
+
+            <button onclick="location.href='{% url 'CustomerUpdate' %}'" name="CustomerUpdate">
+                得意先更新
+            </button>   
+        </div>
+    </div>
 </body>
 </html>

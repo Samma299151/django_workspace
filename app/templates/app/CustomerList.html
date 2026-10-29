@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}"/>
+</head>
+<body>
+    <div class="header">
+        {{mainTitle}}
+    </div>
+
+    <div class="title">
+        {{title}}
+    </div>
+        
+    <div class="content">
+        <!-- メニューボタン管理 -->
+        <div class="left-menu">
+            <button onclick="location.href='{% url 'CustomerManagementMenu' %}'" name="CustomerManagementMenuButton">
+                得意先管理メニュー
+            </button>
+            <br>
+            <button onclick="location.href='{% url 'Logout' %}'" name="logoutButton">
+                ログアウト
+            </button>        
+        </div>
+    </div>
+
+    <!-- 得意先一覧表示テーブル -->
+    <table class="customer-list">
+        <tr>
+            <th>得意先コード</th>
+            <th>得意先名</th>
+            <th>電話番号</th>
+            <th>郵便番号</th>
+            <th>住所</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{item.customer_code}}</td>
+            <td>{{item.customer_name}}</td>
+            <td>{{item.customer_telno}}</td>
+            <td>{{item.customer_postalcode}}</td>
+            <td>{{item.customer_address}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

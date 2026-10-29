@@ -8,48 +8,79 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}"/>
 </head>
 <body>
-    <h1>{{title}}</h1>
-    <button onclick="location.href='{% url 'CustomerManagementMenu' %}'">
-        得意先管理メニュー
-    </button>
-    <table>
-        <form action="{% url 'CustomerSearch' %}" method="post">
-            {% csrf_token %}
-            {{form.as_table}}
-            <tr><td></td><td><button type="submit">検索</button></td></tr>
-        </form>
+    <div class="header">
+        {{mainTitle}}
+    </div>
 
+    <div class="title">
+        {{title}}
+    </div>
+        
+    <div class="content">
+        <!-- メニューボタン管理 -->
+        <div class="left-menu">
+            <button onclick="location.href='{% url 'CustomerManagementMenu' %}'" name="CustomerManagementMenuButton">
+                得意先管理メニュー
+            </button>
+            <br>
+            <button onclick="location.href='{% url 'Logout' %}'" name="logoutButton">
+                ログアウト
+            </button>        
+        </div>
+
+        <!-- 検索フォーム -->
+        <div class="search-area">
+            <form action="{% url 'CustomerSearch' %}" method="post">
+                {% csrf_token %}
+                <tr>
+                    {{form.as_table}}
+                    <td></td>
+                    <td><button type="submit" name="search">検索</button></td>
+                </tr>
+            </form>
+        </div>
+    </div>
+
+    <!-- 検索結果表示テーブル(該当がない場合対応) -->
+    <table class="customer-detail">
         {% if data %}
+        {% for item in data %}
+
         <tr>
             <th>得意先コード</th>
-            <th>得意先名</th>
-            <th>電話番号</th>
-            <th>郵便番号</th>
-            <th>住所</th>
-        </tr>
-        {% for item in data %}
-        <tr>
             <td>{{item.customer_code}}</td>
+        </tr>
+        <tr>
+            <th>得意先名</th>
             <td>{{item.customer_name}}</td>
+        </tr>
+        <tr>
+            <th>電話番号</th>
             <td>{{item.customer_telno}}</td>
+        </tr>
+        <tr>
+            <th>郵便番号</th>
             <td>{{item.customer_postalcode}}</td>
+        </tr>
+        <tr>
+            <th>住所</th>
             <td>{{item.customer_address}}</td>
         </tr>
         {% endfor %}
-
-        <!-- フォームが送信されたかどうかを判定 -->
-        {% elif form.is_bound %} 
-        <tr>
-            <span style="color: red;">
-                該当する得意先コードは存在しません
-            </span>
-        </tr>
-
-        {% endif %}
     </table>
 
-    <button onclick="location.href='{% url 'CustomerManagementMenu' %}'">
-        ログアウト
-    </button>
+    <!-- フォームが送信されたかどうかを判定 -->
+    {% elif form.is_bound %} 
+    <div class="form-check">
+        <span style="color: red;">
+            該当する得意先コードは存在しません
+        </span>
+        <br>
+        <button onclick="location.href='{% url 'CustomerSearch' %}'">
+            戻る
+        </button>
+    </div>
+
+    {% endif %}
 </body>
 </html>
